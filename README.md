@@ -36,7 +36,7 @@ gmfc101/
 ├── core/              # Main source code for processing API calls
 ├── data/samples/      # Small sample transcript files (JSON)
 ├── data/metadata.json # Listing of all available transcripts (JSON)
-├── data/              # Prompts used for workflow and answering user query
+├── prompts/           # Prompts used for workflow and answering user query
 ├── .env.example       # Example env file for setup
 ├── .api.py            # Main API endpoint
 ├── README.md
@@ -53,26 +53,46 @@ gmfc101/
    cd gmfc101
    ```
 
-2. **Install dependencies**
+2. **Create and activate virtual environment**
+
+   ```powershell
+   # Create virtual environment
+   python -m venv venv
+
+   # Activate virtual environment
+   # On Windows:
+   .\venv\Scripts\activate
+   # On macOS/Linux:
+   source venv/bin/activate
+   ```
+
+3. **Install dependencies**
 
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Create `.env` file**
+4. **Create `.env` file**
    Copy `.env.example` and fill in your keys:
 
    ```bash
    cp .env.example .env
    ```
 
-4. **Run the app locally**
+5. **Download transcripts**
+   Run the script to populate the transcript database:
+
+   ```bash
+   python scripts/download_transcripts.py
+   ```
+
+6. **Run the app locally**
 
    ```bash
    python api.py
    ```
 
-5. **Call the API to test it**
+7. **Call the API to test it**
 
    ```
    Call test_webhook API with cast_url in the request
@@ -94,19 +114,23 @@ Deepgram was used to generate the files based on YouTube videos.
 
 ## ⚙️ Environment Variables
 
-| Variable                 | Description                                               |
-| ------------------------ | --------------------------------------------------------- |
-| `OPENAI_API_KEY`         | Your OpenAI API key                                       |
-| `PINECONE_API_KEY`       | Your Pinecone API key                                     |
-| `PINECONE_ENVIRONMENT`   | Your Pinecone environment                                 |
-| `PINECONE_INDEX_NAME`    | Your Pinecone index name                                  |
-| `NEYNAR_API_KEY`         | Your Neynar API key                                       |
-| `NEYNAR_BOT_SIGNER_UUID` | Your Neynar signer UUID key                               |
-| `USE_LLM`                | Set to true                                               |
-| `DRY_RUN_SIMULATION`     | Set to true when testing to avoid creating casts          |
-| `TRANSCRIPT_DIR`         | Path to transcript JSON files (default: `./data/samples`) |
-| `BOT_ACCOUNT_FID`        | Your bot's FID, used to avoid responding to itself        |
-| `VERBOSE_LOGGING`        | Set to false except when debugging                        |
+| Variable                 | Description                                                                               |
+| ------------------------ | ----------------------------------------------------------------------------------------- |
+| `OPENAI_API_KEY`         | Your OpenAI API key                                                                       |
+| `PINECONE_API_KEY`       | Your Pinecone API key                                                                     |
+| `PINECONE_ENVIRONMENT`   | Your Pinecone environment                                                                 |
+| `PINECONE_INDEX_NAME`    | Your Pinecone index name                                                                  |
+| `NEYNAR_API_KEY`         | Your Neynar API key                                                                       |
+| `NEYNAR_BOT_SIGNER_UUID` | Your Neynar signer UUID key                                                               |
+| `USE_LLM`                | Set to true                                                                               |
+| `DRY_RUN_SIMULATION`     | Set to true when testing to avoid creating casts                                          |
+| `DATA_DIR`               | Path to your local data directory (default: `./data`)                                     |
+| `BOT_ACCOUNT_FID`        | Your bot's FID, used to avoid responding to itself                                        |
+| `USE_SAMPLES`            | Whether to use sample files or to downloa dthe full set of production transcripts from S3 |
+| `VERBOSE_LOGGING`        | Set to false except when debugging                                                        |
+| `AWS_ACCESS_KEY_ID`      | Your AWS Access key                                                                       |
+| `AWS_SECRET_ACCESS_KEY`  | Your AWS Secret Access key                                                                |
+| `S3_BUCKET`              | Name of your AWS bucket that contains transcripts                                         |
 
 ---
 
