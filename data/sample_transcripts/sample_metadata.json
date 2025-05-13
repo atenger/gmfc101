@@ -1,0 +1,42 @@
+[
+  {
+    "youtube_url": "https://youtu.be/Yg_6IBhLraw",
+    "episode": "ep50",
+    "hosts": ["NounishProf", "adrienne"],
+    "series": "GM Farcaster",
+    "companion_blog": "",
+    "title": "GM Farcaster ep50, Jan 22, 2024",
+    "aired_date": "2024-01-22",
+    "transcript_path": "transcript_ep50.json"
+  },
+  {
+    "youtube_url": "https://youtu.be/Us0kYDGLpug",
+    "episode": "ep200",
+    "hosts": ["NounishProf", "adrienne", "chaskin.eth"],
+    "series": "GM Farcaster",
+    "companion_blog": "",
+    "title": "Gm Farcaster Ep200 Friday January 10, 2025 with guest  @chaskin.eth",
+    "aired_date": "2025-01-10",
+    "transcript_path": "transcript_ep200.json"
+  },
+  {
+    "series": "Farcaster 101",
+    "episode": "Module 1",
+    "title": "What is Farcaster?",
+    "companion_blog": "https://paragraph.xyz/@gmfarcaster/farcaster-101-module-1",
+    "hosts": ["Adrienne", "NounishProf"],
+    "aired_date": "2024-10-23",
+    "youtube_url": "https://youtu.be/bzclD_VeIpk?si=2NZ5Tov5GkNu3V9z",
+    "transcript_path": "transcript_Module 1.json"
+  },
+  {
+    "youtube_url": "https://youtu.be/kz0hAFIOOmQ",
+    "episode": "The Hub ep1",
+    "hosts": ["dylsteck.eth", "samuellhuber.eth"],
+    "series": "The Hub",
+    "companion_blog": "",
+    "title": "The Hub Episode 1 Tuesday Oct 29, 2024 with guest co-host @samuellhuber",
+    "aired_date": "2024-10-09",
+    "transcript_path": "transcript_TheHubep1.json"
+  }
+]

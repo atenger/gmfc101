@@ -1,0 +1,26 @@
+# Python-related
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+venv/
+.env
+.env.local
+.env.*.local
+
+# IDE settings
+.vscode/
+.idea/
+
+# Sensitive files
+*.key
+# Ignore all .env files except .env.example
+.env
+!.env.example
+
+# Other
+.DS_Store
+test*.py
+data/transcripts/*
+data/metadata.json
