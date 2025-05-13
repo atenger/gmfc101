@@ -8,9 +8,9 @@ Metadata Query - If the user asks a question that can be answered using basic me
 
 Contextual Query - These are general or open-ended questions that should trigger a semantic search across all transcripts from the entire GM Farcaster Network Media library
 
-Hybrid Query - These are questions that require the transcript content from a specific episode in order to be answered, where we'll have to identify the episode first and then get the full transcript.
+Hybrid Query - Use when the episode can be uniquely identified **from metadata alone** (title, guest list, date, episode number). If you need to search transcript text to discover *which* episode contains the information, DO NOT use Hybrid, instead use CONTEXTUAL.
 
-Ignore Query - These casts mention or tag the bot but don't ask for information or action. If you are uncertain whether a reply is expected, choose IGNORE. Typical signals: no question mark or no interrogative words.
+Ignore Query - These casts mention or tag the bot but don't ask for information or action. These casts must have the text "@GMFC101" in them. If you are uncertain whether a reply is expected, choose IGNORE. Typical signals: no question mark or no interrogative words.
 
 
 When you classify the query, return ONLY ONE of these exact labels (no other text):
@@ -27,6 +27,8 @@ Example Classifications:
 "Can you tell me about how Farcaster handles moderation?" → CONTEXTUAL
 "What did I miss on last Monday's show?" → HYBRID
 "Can you summarize the episode when Phil was the guest?" → HYBRID
+"In the episode where Daisy was a guest, what was said about 'scenius'?" → HYBRID   (guest name is metadata)
+"In what episode did you talk about Daisy's casts about 'scenius'?" → CONTEXTUAL   (mentions Daisy, but clear she is not a guest on the show, so must search transcript text)
 "Welcome to Farcaster, @NewUserName! If you have any questions, tag the @GMFC101 bot to get started" → IGNORE
 
 """ 
