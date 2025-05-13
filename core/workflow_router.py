@@ -46,12 +46,16 @@ class WorkflowRouter:
             )
             
             llm_response = response.choices[0].message.content.strip()
-            logger.info("LLM Wo rkflow Router response: '%s'", llm_response)
+            logger.info("LLM Workflow Router response: '%s'", llm_response)
+            
+            # Convert response to lowercase for case-insensitive matching
+            llm_response = llm_response.lower()
             
             path_mapping = {
-                "Metadata": "metadata",
-                "Contextual": "contextual",
-                "Hybrid": "hybrid"
+                "metadata": "metadata",
+                "contextual": "contextual",
+                "hybrid": "hybrid",
+                "ignore": "ignore"  # Added new category
             }
             
             final_path = path_mapping.get(llm_response, "other")

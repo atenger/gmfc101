@@ -383,6 +383,9 @@ def handle_webhook_v2(data, openai_client, pinecone_index, neynar_headers, neyna
                         conversation_summary=conversation_summary,                        
                         depth=depth
                     )
+                elif route_result == "ignore":
+                    logger.warning(f"IGNORE QUERY DETECTED. NOT RESPONDING...")
+                    return jsonify({"status": "ignore query detected"}), 200
                 else:
                     # Fallback for any other route_result values
                     contextual_handler = ContextualPath(openai_client)

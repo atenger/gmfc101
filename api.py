@@ -98,14 +98,17 @@ def test_webhook():
     ### This will then call the webhook handler to generate a response, but response will not be posted to Farcaster
     
     try:
-        # Get the cast URL from the POST request
+        # Get the cast URL and optional cast content from the POST request
         data = request.get_json()
         cast_url = data.get("cast_url")
+        custom_cast_content = data.get("cast_content")  # New optional parameter
         
         if not cast_url:
             return jsonify({"error": "cast_url is required"}), 400
 
         logger.debug(f"Received cast URL: {cast_url}")
+        if custom_cast_content:
+            logger.debug(f"Received custom cast content: {custom_cast_content}")
 
         # Hydrate the cast using Neynar
         response = requests.get(
@@ -115,6 +118,11 @@ def test_webhook():
         )
         response.raise_for_status()
         cast_data = response.json()["cast"]
+        
+        # Override the cast text if custom content was provided
+        if custom_cast_content:
+            cast_data["text"] = custom_cast_content
+            logger.debug("Overriding cast text with custom content")
         
         logger.debug(f"Retrieved cast data: {cast_data}")
         
