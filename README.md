@@ -15,7 +15,7 @@ GMFC101 is an AI assistant that answers questions based on podcast and video tra
 - Uses OpenAI GPT-4-turbo for answer generation
 - Designed to support educational or media content archives
 
-This repo includes the core bot logic and sample data to help you run and extend it.
+This repo is the actual repo that GMFC101 runs on, and includes core bot logic and sample data to help you customize it or extend it for your use.
 
 ---
 
@@ -131,6 +131,53 @@ Deepgram was used to generate the files based on YouTube videos.
 | `AWS_ACCESS_KEY_ID`      | Your AWS Access key                                                                       |
 | `AWS_SECRET_ACCESS_KEY`  | Your AWS Secret Access key                                                                |
 | `S3_BUCKET`              | Name of your AWS bucket that contains transcripts                                         |
+
+---
+
+# Transcript Management Scripts
+
+This project includes scripts for managing transcript files and metadata in both development and production environments.
+
+## Scripts Overview
+
+### 1. Initial Setup (`download_transcripts.py`)
+
+Use this script for:
+
+- First-time project setup
+- Complete database refresh
+- Works for either sample or production data
+
+```powershell
+# For production setup
+# Set USE_SAMPLES=false in .env file
+python scripts/download_transcripts.py
+
+# For sample data setup
+# Set USE_SAMPLES=true in .env file
+python scripts/download_transcripts.py
+```
+
+### 2. Ongoing Updates (`update_transcripts.py`)
+
+Use this script for:
+
+- Adding new transcripts
+- Updating metadata
+
+```powershell
+# Update metadata and download a new transcript
+python scripts/update_transcripts.py --metadata --transcript transcript_123.json
+
+# Update only metadata.json
+python scripts/update_transcripts.py --metadata
+
+# Download only a new transcript
+python scripts/update_transcripts.py --transcript transcript_123.json
+
+# Force overwrite without confirmation
+python scripts/update_transcripts.py --metadata --transcript transcript_123.json --force
+```
 
 ---
 
