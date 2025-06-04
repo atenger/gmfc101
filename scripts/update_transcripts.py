@@ -119,6 +119,13 @@ def check_file_exists(file_path, force=False):
         logger.info(f"Overwriting existing file: {os.path.basename(file_path)}")
     return True
 
+def count_transcript_files(data_dir):
+    """Count the total number of transcript files in the transcripts directory."""
+    transcript_dir = os.path.join(data_dir, 'transcripts')
+    if not os.path.exists(transcript_dir):
+        return 0
+    return len([f for f in os.listdir(transcript_dir) if f.startswith('transcript_') and f.endswith('.json')])
+
 def update_transcripts(transcript_filename=None, download_metadata=False, force=False, verify=True):
     start_time = time.time()
     logger.info(f"Starting update process at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
@@ -176,6 +183,9 @@ def update_transcripts(transcript_filename=None, download_metadata=False, force=
                     if verify and not verify_transcript(local_path):
                         logger.error("Transcript verification failed")
                         sys.exit(1)
+                    # Count and display total transcript files after successful download
+                    total_transcripts = count_transcript_files(data_dir)
+                    logger.info(f"Total transcript files in data directory: {total_transcripts}")
                 except Exception as e:
                     logger.error(f"Error downloading transcript: {str(e)}")
                     sys.exit(1)
