@@ -23,13 +23,14 @@ python update_transcripts.py --metadata
 # Download only a new transcript
 python update_transcripts.py --transcript transcript_123.json
 
-# Force overwrite existing files without confirmation
+# Force overwrite existing transcript files without confirmation.  
+# Note: this is only for transcripts, not metadata.json. Metadata will alwaysbe overwritten without confirmation.
 python update_transcripts.py --metadata --transcript transcript_123.json --force
 
 Options:
     --metadata: Update metadata.json file
     --transcript FILENAME: Download specific transcript file
-    --force: Skip confirmation and overwrite existing files
+    --force: Skip confirmation and overwrite existing transcriptfiles
     --verify: Verify downloaded files (default: True)
 
 Note: For initial project setup or complete database refresh, use download_transcripts.py instead.
@@ -144,7 +145,7 @@ def update_transcripts(transcript_filename=None, download_metadata=False, force=
         # Handle metadata download
         if download_metadata:
             metadata_path = os.path.join(data_dir, 'metadata.json')
-            if check_file_exists(metadata_path, force):
+            if check_file_exists(metadata_path, force=True):
                 logger.info(f"Downloading metadata.json from {bucket}")
                 try:
                     s3.download_file(bucket, 'metadata.json', metadata_path)
